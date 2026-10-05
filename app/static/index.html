@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORA AI // Autonomous Deep Research & Runtime Security Control Plane</title>
+    <meta name="description" content="FORA AI - Autonomous multi-agent deep research engine and runtime security control plane inspired by Guardbase. Zero-cost live intelligence powered by LangGraph, FastMCP, and Groq.">
+    <!-- Google & Fontshare Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="guardbase-body">
+    <!-- Subtle Architectural CAD Grid -->
+    <div class="architectural-grid"></div>
+
+    <!-- Top Announcement Strip (Guardbase Attack Matrix Style) -->
+    <div class="announcement-bar">
+        <a href="#pipeline" class="announcement-link">
+            <span class="announcement-tag">FRAMEWORK</span>
+            <span>FORA AI releases Autonomous Multi-Agent Research & Runtime Security Control Plane</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+
+    <!-- Sticky Architectural Navigation (Guardbase Clean Minimalist Navbar) -->
+    <header class="guardbase-header">
+        <div class="header-container">
+            <a href="/" class="brand-group">
+                <div class="brand-badge">
+                    <span class="badge-bracket tl"></span>
+                    <span class="badge-bracket tr"></span>
+                    <span class="badge-bracket bl"></span>
+                    <span class="badge-bracket br"></span>
+                    <div class="badge-core"></div>
+                </div>
+                <div class="brand-text-block">
+                    <span class="brand-title">FORA <span>AI</span></span>
+                    <span class="brand-subtitle">CONTROL PLANE // RUNTIME SEC</span>
+                </div>
+            </a>
+
+            <!-- Central Nav Links -->
+            <nav class="header-nav">
+                <a href="#pipeline" class="nav-link active">Agent Pipeline</a>
+                <a href="#directive" class="nav-link">Mission Directive</a>
+                <a href="#runtimes" class="nav-link">Security Runtimes</a>
+                <a href="#dossier" class="nav-link">Intelligence Dossier</a>
+            </nav>
+
+            <!-- Right Telemetry & Action Buttons -->
+            <div class="header-actions">
+                <div class="status-telemetry-pill">
+                    <span class="live-indicator"></span>
+                    <span>ENGINE: ONLINE</span>
+                </div>
+                <div class="status-telemetry-pill">
+                    <span>TEMP: <strong style="color: var(--brand-primary);">0.00 STRICT</strong></span>
+                </div>
+                <button id="openHistoryBtn" class="btn-bracket" title="Session Mission History Archive">
+                    <span class="bracket bracket-tl"></span>
+                    <span class="bracket bracket-tr"></span>
+                    <span class="bracket bracket-bl"></span>
+                    <span class="bracket bracket-br"></span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>Archive (<span id="historyCountBadge">0</span>)</span>
+                </button>
+                <a href="/docs" target="_blank" class="btn-bracket">
+                    <span class="bracket bracket-tl"></span>
+                    <span class="bracket bracket-tr"></span>
+                    <span class="bracket bracket-bl"></span>
+                    <span class="bracket bracket-br"></span>
+                    <span>API Docs</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Chassis: Flanked by Diagonal Hatch Gutters -->
+    <div class="chassis-section">
+        <div class="chassis-gutter bg-diagonal-pattern"></div>
+        
+        <main class="chassis-container">
+            <!-- Corner Crosshairs -->
+            <span class="chassis-crosshair tl">+</span>
+            <span class="chassis-crosshair tr">+</span>
+            <span class="chassis-crosshair bl">+</span>
+            <span class="chassis-crosshair br">+</span>
+
+            <!-- Hero Editorial Section (Guardbase Signature Headline & Tilted Stickers) -->
+            <section class="hero-editorial">
+                <span class="hero-tag">AUTONOMOUS MULTI-AGENT INTELLIGENCE</span>
+                <h1 class="hero-heading">
+                    Say yes to deep research.<br>
+                    Not to <span class="hero-tilt" style="--rot: -2.5deg">hallucinations</span> and <span class="hero-tilt danger" style="--rot: 1.8deg">unverified data</span>.
+                </h1>
+                <p class="hero-subtext">
+                    FORA AI deploys four collaborating autonomous agents through zero-cost DuckDuckGo search, FastMCP scraping, adversarial audit reflection, and zero-hallucination synthesis strictly at temperature 0.0.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 16px;">
+                    <a href="#directive" class="btn-bracket primary">
+                        <span class="bracket bracket-tl"></span>
+                        <span class="bracket bracket-tr"></span>
+                        <span class="bracket bracket-bl"></span>
+                        <span class="bracket bracket-br"></span>
+                        <span>Initialize Investigation</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                    <a href="#runtimes" class="btn-bracket">
+                        <span class="bracket bracket-tl"></span>
+                        <span class="bracket bracket-tr"></span>
+                        <span class="bracket bracket-bl"></span>
+                        <span class="bracket bracket-br"></span>
+                        <span>View Security Architecture</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Guardbase Signature Agent Flow Pipeline (Hero Schematic Diagram) -->
+            <section id="pipeline" class="agent-flow-stage">
+                <div class="flow-stage-header">
+                    <span class="flow-title">AUTONOMOUS COGNITIVE AGENT PIPELINE // LIVE ACTION SCHEMATIC</span>
+                    <div class="flow-legend">
+                        <span class="legend-item"><span class="legend-dot allow"></span> ALLOW / VERIFIED</span>
+                        <span class="legend-item"><span class="legend-dot block"></span> BLOCK / SSRF DEFENSE</span>
+                        <span class="legend-item"><span class="legend-dot redact"></span> REDACT / NOISE FILTER</span>
+                    </div>
+                </div>
+
+                <div class="flow-svg-container">
+                    <svg viewBox="0 0 1160 380" class="flow-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Pipe Tube Gradient -->
+                            <linearGradient id="pipeTube" x1="0" y1="0" x2="0" y2="100%">
+                                <stop offset="0%" stop-color="rgba(255,255,255,0.08)" />
+                                <stop offset="50%" stop-color="rgba(255,255,255,0.04)" />
+                                <stop offset="100%" stop-color="rgba(255,255,255,0.02)" />
+                            </linearGradient>
+
+                            <!-- Checkpoint Gate Hatch Pattern -->
+                            <pattern id="gateHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                                <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(240, 235, 224, 0.08)" stroke-width="1.2" />
+                            </pattern>
+
+                            <!-- Pipe Paths -->
+                            <path id="path1" d="M 190,55 C 340,55 360,190 490,190 H 670 C 800,190 820,55 970,55" />
+                            <path id="path2" d="M 190,135 C 340,135 370,190 490,190 H 670 C 790,190 820,135 970,135" />
+                            <path id="path3" d="M 190,245 C 340,245 370,190 490,190 H 670 C 790,190 820,245 970,245" />
+                            <path id="path4" d="M 190,325 C 340,325 360,190 490,190 H 670 C 800,190 820,325 970,325" />
+                            <path id="pathBlock" d="M 190,135 C 340,135 370,190 490,190 H 570" />
+                        </defs>
+
+                        <!-- Solid Background Pipe Tubes -->
+                        <path d="M 190,55 C 340,55 360,190 490,190" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 190,135 C 340,135 370,190 490,190" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 190,245 C 340,245 370,190 490,190" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 190,325 C 340,325 360,190 490,190" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        
+                        <path d="M 490,190 H 670" stroke="url(#pipeTube)" stroke-width="24" stroke-linecap="round" />
+
+                        <path d="M 670,190 C 800,190 820,55 970,55" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 670,190 C 790,190 820,135 970,135" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 670,190 C 790,190 820,245 970,245" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+                        <path d="M 670,190 C 800,190 820,325 970,325" stroke="url(#pipeTube)" stroke-width="14" stroke-linecap="round" />
+
+                        <!-- Flow Dashes (Animated Directional Pulses) -->
+                        <path d="M 190,55 C 340,55 360,190 490,190" class="flow-dash" fill="none" />
+                        <path d="M 190,135 C 340,135 370,190 490,190" class="flow-dash" fill="none" />
+                        <path d="M 190,245 C 340,245 370,190 490,190" class="flow-dash" fill="none" />
+                        <path d="M 190,325 C 340,325 360,190 490,190" class="flow-dash" fill="none" />
+                        <path d="M 490,190 H 670" class="flow-dash" fill="none" />
+                        <path d="M 670,190 C 800,190 820,55 970,55" class="flow-dash" fill="none" />
+                        <path d="M 670,190 C 790,190 820,135 970,135" class="flow-dash" fill="none" />
+                        <path d="M 670,190 C 790,190 820,245 970,245" class="flow-dash" fill="none" />
+                        <path d="M 670,190 C 800,190 820,325 970,325" class="flow-dash" fill="none" />
+
+                        <!-- LEFT: 4 Autonomous Agent Chips -->
+                        <!-- Agent 1: Planner -->
+                        <g id="flow-agent-planner" class="node-chip">
+                            <rect x="20" y="32" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="34" y="50" class="node-chip-code">AG-01 // DECOMPOSITION</text>
+                            <text x="34" y="67" class="node-chip-title">RESEARCH PLANNER</text>
+                        </g>
+
+                        <!-- Agent 2: Recon / Web Scraping -->
+                        <g id="flow-agent-researcher" class="node-chip">
+                            <rect x="20" y="112" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="34" y="130" class="node-chip-code">AG-02 // MCP TOOL CALLS</text>
+                            <text x="34" y="147" class="node-chip-title">DDGS &amp; DOC SCRAPER</text>
+                        </g>
+
+                        <!-- Agent 3: Critic / Fact Audit -->
+                        <g id="flow-agent-critic" class="node-chip">
+                            <rect x="20" y="222" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="34" y="240" class="node-chip-code">AG-03 // REFLECTION LOOP</text>
+                            <text x="34" y="257" class="node-chip-title">ADVERSARIAL AUDITOR</text>
+                        </g>
+
+                        <!-- Agent 4: Synthesizer -->
+                        <g id="flow-agent-synthesizer" class="node-chip">
+                            <rect x="20" y="302" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="34" y="320" class="node-chip-code">AG-04 // CANONICAL CITATIONS</text>
+                            <text x="34" y="337" class="node-chip-title">REPORT SYNTHESIZER</text>
+                        </g>
+
+                        <!-- CENTER: The Guardbase Security Checkpoint Trunk -->
+                        <g class="checkpoint-gate">
+                            <rect x="548" y="0" width="64" height="380" fill="url(#gateHatch)" stroke="#22252f" stroke-width="1" />
+                            <!-- Center Badge -->
+                            <rect x="556" y="166" width="48" height="48" rx="2" class="gate-badge" />
+                            <polygon points="580,178 594,190 580,202 566,190" fill="#5EEAD4" />
+                            <circle cx="580" cy="190" r="3" fill="#08090b" />
+                        </g>
+
+                        <!-- Gate Edge Red Flash (When block triggers) -->
+                        <line x1="548" y1="170" x2="548" y2="210" class="gate-flash" opacity="0">
+                            <animate attributeName="opacity" dur="3.5s" begin="2s" repeatCount="indefinite" values="0;1;0;0" keyTimes="0;0.05;0.18;1" />
+                        </line>
+
+                        <!-- Animated Traveling Tokens (ALLOW / BLOCK / REDACT) -->
+                        <!-- Token 1: Allow (Planner to DuckDuckGo) -->
+                        <g class="tok-allow">
+                            <rect x="-5" y="-5" width="10" height="10" rx="1.5" fill="#5EEAD4">
+                                <animate attributeName="fill" dur="5s" begin="0s" repeatCount="indefinite" values="#8E939E;#8E939E;#5EEAD4;#5EEAD4" keyTimes="0;0.45;0.55;1" />
+                            </rect>
+                            <animateMotion dur="5s" begin="0s" repeatCount="indefinite" rotate="0">
+                                <mpath href="#path1" />
+                            </animateMotion>
+                            <animate attributeName="opacity" dur="5s" begin="0s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;0.08;0.5;0.92;1" />
+                        </g>
+
+                        <!-- Token 2: Redact / Scrape Noise Cleaned -->
+                        <g class="tok-redact">
+                            <rect x="-5" y="-5" width="10" height="10" rx="1.5" fill="#EFF35F">
+                                <animate attributeName="fill" dur="5.5s" begin="1.2s" repeatCount="indefinite" values="#8E939E;#8E939E;#EFF35F;#EFF35F" keyTimes="0;0.45;0.55;1" />
+                            </rect>
+                            <animateMotion dur="5.5s" begin="1.2s" repeatCount="indefinite" rotate="0">
+                                <mpath href="#path2" />
+                            </animateMotion>
+                            <animate attributeName="opacity" dur="5.5s" begin="1.2s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;0.08;0.5;0.92;1" />
+                        </g>
+
+                        <!-- Token 3: Block (SSRF / Poisoning blocked at gate) -->
+                        <g class="tok-block">
+                            <rect x="-5" y="-5" width="10" height="10" rx="1.5" fill="#EF4444" />
+                            <animateMotion dur="3.5s" begin="2s" repeatCount="indefinite" rotate="0" calcMode="linear" keyPoints="0;1;1" keyTimes="0;0.8;1">
+                                <mpath href="#pathBlock" />
+                            </animateMotion>
+                            <animate attributeName="opacity" dur="3.5s" begin="2s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.8;1" />
+                        </g>
+
+                        <!-- Token 4: Allow (Synthesizer to SQLite Checkpoints) -->
+                        <g class="tok-allow">
+                            <rect x="-5" y="-5" width="10" height="10" rx="1.5" fill="#5EEAD4" />
+                            <animateMotion dur="5.2s" begin="3.2s" repeatCount="indefinite" rotate="0">
+                                <mpath href="#path4" />
+                            </animateMotion>
+                            <animate attributeName="opacity" dur="5.2s" begin="3.2s" repeatCount="indefinite" values="0;1;1;1;0" keyTimes="0;0.08;0.5;0.92;1" />
+                        </g>
+
+                        <!-- RIGHT: 4 Execution Destination Targets -->
+                        <!-- Destination 1: Search -->
+                        <g class="node-chip">
+                            <rect x="970" y="32" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="984" y="50" class="node-chip-code">SEARCH PROVIDER</text>
+                            <text x="984" y="67" class="node-chip-title">DUCKDUCKGO DDGS</text>
+                        </g>
+
+                        <!-- Destination 2: MCP Doc Parser -->
+                        <g class="node-chip">
+                            <rect x="970" y="112" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="984" y="130" class="node-chip-code">SSRF-SAFE GATEWAY</text>
+                            <text x="984" y="147" class="node-chip-title">FASTMCP SCRAPER</text>
+                        </g>
+
+                        <!-- Destination 3: Groq LLM -->
+                        <g class="node-chip">
+                            <rect x="970" y="222" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="984" y="240" class="node-chip-code">LLM INFERENCE CORE</text>
+                            <text x="984" y="257" class="node-chip-title">GROQ QWEN-27B (0.0)</text>
+                        </g>
+
+                        <!-- Destination 4: Persistence -->
+                        <g class="node-chip">
+                            <rect x="970" y="302" width="170" height="46" rx="3" class="node-chip-rect" />
+                            <text x="984" y="320" class="node-chip-code">PERSISTENT STORAGE</text>
+                            <text x="984" y="337" class="node-chip-title">SQLITE AIO SAVER</text>
+                        </g>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Mission Directive Terminal Console -->
+            <section id="directive" class="directive-console-section">
+                <div class="directive-frame">
+                    <span class="chassis-crosshair tl">+</span>
+                    <span class="chassis-crosshair tr">+</span>
+                    <span class="chassis-crosshair bl">+</span>
+                    <span class="chassis-crosshair br">+</span>
+
+                    <div class="directive-header">
+                        <div class="directive-title-wrap">
+                            <span class="directive-tag">MISSION DIRECTIVE // DISPATCH TARGET</span>
+                        </div>
+                        <div class="directive-shortcuts">
+                            PRESS <span class="key-tag">ENTER</span> TO ENGAGE
+                        </div>
+                    </div>
+
+                    <form id="researchForm" class="directive-input-form">
+                        <div class="terminal-line">
+                            <span class="terminal-prefix">FORA_RUNTIME:~#</span>
+                            <input 
+                                type="text" 
+                                id="topicInput" 
+                                class="directive-input" 
+                                placeholder="Enter technical research directive, thesis, or security scope..." 
+                                required 
+                                autocomplete="off"
+                            >
+                            <button type="submit" id="submitBtn" class="terminal-dispatch-btn">
+                                <span class="btn-caption">DISPATCH AGENTS</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Pre-Configured Target Directive Chips -->
+                    <div class="targets-bar">
+                        <span class="targets-caption">PRE-AUTHENTICATED TARGET DIRECTIVES:</span>
+                        <button type="button" class="target-pill" data-prompt="EU AI Act compliance requirements for LLM fine-tuning and deployment">
+                            <span class="pill-code">DIR 01</span>
+                            <span>EU AI Act compliance for LLM fine-tuning</span>
+                        </button>
+                        <button type="button" class="target-pill" data-prompt="Recent breakthroughs in room-temperature sodium-ion batteries 2025">
+                            <span class="pill-code">DIR 02</span>
+                            <span>Sodium-ion battery commercial breakthroughs</span>
+                        </button>
+                        <button type="button" class="target-pill" data-prompt="LangGraph vs CrewAI architecture and state management comparison">
+                            <span class="pill-code">DIR 03</span>
+                            <span>LangGraph vs CrewAI architecture benchmark</span>
+                        </button>
+                    </div>
+
+                    <!-- Investigation Depth, Parameter Controls & Governance Flags -->
+                    <div class="controls-strip">
+                        <div class="depth-selector">
+                            <span class="depth-label">INVESTIGATION DEPTH:</span>
+                            <div class="depth-buttons">
+                                <button type="button" class="depth-toggle-btn active" data-depth="quick">QUICK RECON (1-LOOP · ~15s)</button>
+                                <button type="button" class="depth-toggle-btn" data-depth="deep">DEEP ADVERSARIAL AUDIT (3-LOOP CRITIC)</button>
+                            </div>
+                        </div>
+
+                        <div class="params-row">
+                            <div class="param-group">
+                                <label class="param-label" for="maxSourcesSelect">MAX SOURCES:</label>
+                                <select id="maxSourcesSelect" class="param-select">
+                                    <option value="5">5 Sources (Rapid)</option>
+                                    <option value="10" selected>10 Sources (Standard)</option>
+                                    <option value="15">15 Sources (In-Depth)</option>
+                                    <option value="20">20 Sources (Exhaustive)</option>
+                                </select>
+                            </div>
+                            <div class="param-group">
+                                <label class="param-label" for="timeoutSelect">TIME LIMIT:</label>
+                                <select id="timeoutSelect" class="param-select">
+                                    <option value="30">30s (Strict Timeout)</option>
+                                    <option value="60">60s (Balanced)</option>
+                                    <option value="120" selected>120s (Comprehensive)</option>
+                                    <option value="300">300s (Extended Deep)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="governance-flags">
+                            <div class="gov-flag">SSRF FIREWALL: <span class="highlight">ARMED</span></div>
+                            <div class="gov-flag">PROMPT INJECTION SHIELD: <span class="highlight">ENFORCED</span></div>
+                            <div class="gov-flag">TEMPERATURE: <span class="highlight">0.00 (STRICT)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Agent Cognitive Orchestration Feed -->
+                <div id="telemetrySection" class="telemetry-deck">
+                    <div class="telemetry-deck-header">
+                        <div class="feed-title-wrap">
+                            <span class="live-indicator"></span>
+                            <span class="feed-title">COGNITIVE ORCHESTRATION FEED // REAL-TIME TRACE</span>
+                        </div>
+                        <div class="feed-stats">
+                            <span>TASK: <code id="activeTaskId">--</code></span>
+                            <span>ELAPSED: <code id="timerBadge">00:00</code></span>
+                            <span>STATUS: <code id="fleetStateBadge" style="color: var(--brand-primary);">IDLE</code></span>
+                            <button type="button" id="cancelTaskBtn" class="btn-bracket danger" style="display: none; padding: 4px 10px; font-size: 11px; margin-left: 8px;" title="Abort and Cancel Task">
+                                <span class="bracket bracket-tl"></span>
+                                <span class="bracket bracket-tr"></span>
+                                <span class="bracket bracket-bl"></span>
+                                <span class="bracket bracket-br"></span>
+                                <span>CANCEL TASK ✕</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="traceLogStream" class="telemetry-stream-console">
+                        <!-- Streamed log lines -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Guardbase Bento Feature Cards ("In the Wild") -->
+            <section id="runtimes" class="bento-features-section">
+                <div class="section-label-center">SECURITY ARCHITECTURE</div>
+                <h2 class="section-headline-center">Engineered for runtime control, not hallucination.</h2>
+                <p class="section-subtext-center">
+                    FORA AI enforces defense-in-depth across the entire multi-agent lifecycle to ensure grounded, verifiable output.
+                </p>
+
+                <div class="bento-grid-3">
+                    <!-- Feature 1 -->
+                    <div class="bento-card-gb">
+                        <div class="card-visual-top">
+                            <pre class="schematic-ascii">
++------------------------+
+| SSRF FIREWALL / MCP    |
+| Block: 127.0.0.1, 10.* |
+| Block: 169.254.169.254 |
+| Status: [ ENFORCED ]   |
++------------------------+
+                            </pre>
+                        </div>
+                        <div class="card-body-gb">
+                            <span class="card-category">RUNTIME GOVERNANCE</span>
+                            <h3 class="card-title-gb">SSRF &amp; Injection Defense</h3>
+                            <p class="card-desc-gb">
+                                FastMCP tools validate every URL against RFC1918 and cloud metadata vectors. Scraped content is sandboxed inside strict delimiters to neutralize prompt injections.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bento-card-gb">
+                        <div class="card-visual-top">
+                            <pre class="schematic-ascii">
+   [ RESEARCH DRAFT ]
+           |
+           v
+  { ADVERSARIAL CRITIC }
+   Score >= 80%? -> PASS
+   Score &lt; 80%?  -> LOOP (MAX 3)
+                            </pre>
+                        </div>
+                        <div class="card-body-gb">
+                            <span class="card-category">ADVERSARIAL REFLECTION</span>
+                            <h3 class="card-title-gb">Self-Correcting Audit Loop</h3>
+                            <p class="card-desc-gb">
+                                Node AG-03 stress-tests draft findings, flags unsubstantiated assertions, and dispatches secondary search queries with a hard circuit breaker capping execution at 3 iterations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bento-card-gb">
+                        <div class="card-visual-top">
+                            <pre class="schematic-ascii">
++------------------------+
+| CANONICAL CITATION MAP |
+| Source [01]: canonical |
+| Source [02]: canonical |
+| Hallucinations: 0.00%  |
++------------------------+
+                            </pre>
+                        </div>
+                        <div class="card-body-gb">
+                            <span class="card-category">GROUNDED SYNTHESIS</span>
+                            <h3 class="card-title-gb">Zero-Hallucination Dossier</h3>
+                            <p class="card-desc-gb">
+                                Output is generated strictly at temperature 0.0 with URL canonicalization. Citations are verified against scraped text buffers before final report assembly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Intelligence Dossier (Report View) -->
+            <section id="reportSection" class="dossier-section">
+                <div class="dossier-frame">
+                    <span class="chassis-crosshair tl">+</span>
+                    <span class="chassis-crosshair tr">+</span>
+                    <span class="chassis-crosshair bl">+</span>
+                    <span class="chassis-crosshair br">+</span>
+
+                    <div class="dossier-header-bar">
+                        <div class="dossier-stamp-group">
+                            <span class="classified-stamp">VERIFIED DOSSIER</span>
+                            <span id="dossierTopicTitle" class="dossier-title">Executive Intelligence Briefing</span>
+                        </div>
+                        <div class="dossier-actions">
+                            <button id="copyMarkdownBtn" class="btn-bracket" title="Copy Raw Markdown">
+                                <span class="bracket bracket-tl"></span>
+                                <span class="bracket bracket-tr"></span>
+                                <span class="bracket bracket-bl"></span>
+                                <span class="bracket bracket-br"></span>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <span>Copy Markdown</span>
+                            </button>
+                            <button id="downloadMdBtn" class="btn-bracket" title="Download Report File">
+                                <span class="bracket bracket-tl"></span>
+                                <span class="bracket bracket-tr"></span>
+                                <span class="bracket bracket-bl"></span>
+                                <span class="bracket bracket-br"></span>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>Export .MD</span>
+                            </button>
+                            <button id="printDossierBtn" class="btn-bracket" title="Print Briefing or Save as Clean PDF">
+                                <span class="bracket bracket-tl"></span>
+                                <span class="bracket bracket-tr"></span>
+                                <span class="bracket bracket-bl"></span>
+                                <span class="bracket bracket-br"></span>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span>Print / PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Strip with Intent & Uncertainty Rating -->
+                    <div class="dossier-metrics-strip">
+                        <div class="metric-cell">
+                            <span class="metric-label">CLASSIFIED INTENT</span>
+                            <span id="queryIntentBadge" class="metric-val highlight">EXPLANATORY</span>
+                        </div>
+                        <div class="metric-cell">
+                            <span class="metric-label">CERTAINTY RATING</span>
+                            <span id="uncertaintyBadge" class="metric-val highlight">WELL SUPPORTED</span>
+                        </div>
+                        <div class="metric-cell">
+                            <span class="metric-label">RANKED SOURCES</span>
+                            <span id="sourcesCountBadge" class="metric-val">0 SOURCES</span>
+                        </div>
+                        <div class="metric-cell">
+                            <span class="metric-label">AUDIT CYCLES</span>
+                            <span id="reportIterationsBadge" class="metric-val">1 CYCLE</span>
+                        </div>
+                    </div>
+
+                    <!-- Contradiction Alert Box (Hidden if sources agree) -->
+                    <div id="contradictionAlertBox" class="contradiction-box" style="display: none;">
+                        <div class="contradiction-header">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>SOURCE DISAGREEMENTS &amp; CONFLICTING EVIDENCE DETECTED</span>
+                        </div>
+                        <div id="contradictionsList"></div>
+                    </div>
+
+                    <!-- Dossier Content Body (Adaptive Markdown) -->
+                    <div id="reportMarkdownContainer" class="dossier-body">
+                        <!-- Rendered Report -->
+                    </div>
+
+                    <!-- Claim-Level Grounding Drawer -->
+                    <div class="claims-drawer">
+                        <div class="claims-drawer-header">
+                            <span class="sources-label">ATOMIC CLAIM-LEVEL EVIDENCE MAP</span>
+                            <span id="claimsCountBadge" class="sources-label" style="color: var(--text-secondary);">0 AUDITED CLAIMS</span>
+                        </div>
+                        <div id="claimsList" class="claims-grid">
+                            <!-- Populated with claim cards -->
+                        </div>
+                    </div>
+
+                    <!-- Verified Sources Drawer -->
+                    <div class="sources-drawer">
+                        <div class="sources-drawer-header">
+                            <span class="sources-label">CANONICAL SOURCE CITATION MAP</span>
+                        </div>
+                        <div id="sourcesList" class="sources-grid">
+                            <!-- Populated with verified citation cards -->
+                        </div>
+                    </div>
+
+                    <!-- Grounded Follow-up Interrogation (Zero-Hallucination Q&A) -->
+                    <div class="qa-console-container">
+                        <div class="qa-header-row">
+                            <div class="qa-badge-title">
+                                <span class="qa-tag">GROUNDED INTERROGATION</span>
+                                <span class="qa-subtext">Follow-up inquiries answered strictly from verified research citations at temperature 0.0.</span>
+                            </div>
+                        </div>
+
+                        <div id="qaMessagesContainer" class="qa-history-stream">
+                            <div class="qa-bubble agent">
+                                <div class="qa-bubble-tag">FORA // AUDITOR</div>
+                                <div>Dossier assembled and locked into memory. Ask any specific question regarding these findings, methodologies, or data points.</div>
+                            </div>
+                        </div>
+
+                        <form id="qaForm" class="qa-input-bar">
+                            <input 
+                                type="text" 
+                                id="qaInput" 
+                                class="qa-text-input" 
+                                placeholder="Ask a targeted follow-up question regarding these research findings..." 
+                                required
+                            >
+                            <button type="submit" id="qaSubmitBtn" class="btn-bracket primary">
+                                <span class="bracket bracket-tl"></span>
+                                <span class="bracket bracket-tr"></span>
+                                <span class="bracket bracket-bl"></span>
+                                <span class="bracket bracket-br"></span>
+                                <span>Inquire</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="chassis-gutter bg-diagonal-pattern"></div>
+    </div>
+
+    <!-- Minimalist Footer (Guardbase Style) -->
+    <footer class="guardbase-footer">
+        <div class="footer-inner">
+            <div>&copy; 2026 FORA AI // Autonomous Multi-Agent Deep Research &amp; Runtime Security Control Plane. Zero Cost Architecture.</div>
+            <div class="footer-nav">
+                <a href="#pipeline">Pipeline Matrix</a>
+                <a href="#directive">Directive Terminal</a>
+                <a href="#runtimes">Security Specs</a>
+                <a href="/docs" target="_blank">OpenAPI Specs</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Session Mission History Slide-Over Drawer -->
+    <div id="historyModal" class="history-drawer-overlay">
+        <div class="history-drawer-content">
+            <div class="history-drawer-header">
+                <div class="history-title-wrap">
+                    <span class="history-tag">ARCHIVE // SESSION MISSIONS</span>
+                    <h3 class="history-headline">Session Mission Archive</h3>
+                </div>
+                <button id="closeHistoryBtn" class="history-close-btn" title="Close Archive">✕</button>
+            </div>
+            <div class="history-sub-bar">
+                <span id="historyDrawerCount">0 MISSIONS RECORDED IN CURRENT SESSION</span>
+            </div>
+            <div id="historyItemsContainer" class="history-missions-list">
+                <!-- Populated dynamically via GET /api/v1/research -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Frontend Controller Script -->
+    <script src="/static/app.js"></script>
+</body>
+</html>

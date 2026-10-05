@@ -1,0 +1,27 @@
+services:
+  research-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: research-engine-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_PROVIDER=${LLM_PROVIDER:-groq}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - DEFAULT_MODEL=${DEFAULT_MODEL:-llama-3.3-70b-versatile}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.1:8b}
+      - MAX_RESEARCH_ITERATIONS=${MAX_RESEARCH_ITERATIONS:-3}
+      - SEARCH_MAX_RESULTS=${SEARCH_MAX_RESULTS:-5}
+      - REQUEST_TIMEOUT_SECONDS=${REQUEST_TIMEOUT_SECONDS:-30}
+      - SQLITE_DB_PATH=/app/data/checkpoints.db
+    volumes:
+      - research-data:/app/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  research-data:
+    name: research-engine-checkpoints
