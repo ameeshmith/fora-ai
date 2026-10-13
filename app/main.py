@@ -93,12 +93,17 @@ async def health_check():
     }
 
 
-# Root endpoint: Serves Guardbase Deep Research Dashboard UI
+# Root endpoint: Serves Deep Research Dashboard UI
 @app.get("/", tags=["UI"], include_in_schema=False)
 async def serve_ui():
     index_file = STATIC_DIR / "index.html"
     if index_file.exists():
-        return FileResponse(str(index_file))
+        headers = {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        }
+        return FileResponse(str(index_file), headers=headers)
     return {
         "message": "Welcome to the Autonomous Multi-Agent Research Engine API.",
         "docs": "/docs",

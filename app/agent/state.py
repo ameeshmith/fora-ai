@@ -24,6 +24,9 @@ class ResearchState(TypedDict, total=False):
     current_step: str  # Current active node for progress reporting
     active_substep: str  # Fine-grained action description (e.g. 'Classifying query intent')
     logs: List[Dict[str, Any]]  # Live telemetry timeline of agent actions
+    evidence_set: List[Dict[str, Any]]  # Curated accepted EvidenceItem objects passed to generation
+    debug_trace: Optional[Dict[str, Any]]  # Observability trace (scoring, rejections, parsed query)
+    insufficient_evidence: bool  # Flag indicating if evidence was insufficient to answer question
     final_report: Optional[Dict[str, Any]]  # Synthesized final report payload
     verification_passed: bool  # Final claim verification gate status
     error: Optional[str]  # Error message if failure encountered

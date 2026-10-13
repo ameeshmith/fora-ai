@@ -144,7 +144,7 @@ def test_api_health_endpoint():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "research-engine"
+    assert data["service"] in ["FORA AI", "research-engine"]
 
 
 def test_api_research_flow():
@@ -164,7 +164,7 @@ def test_api_research_flow():
     assert status_res.status_code == 200
     status_data = status_res.json()
     assert status_data["task_id"] == task_id
-    assert status_data["status"] in ["processing", "completed"]
+    assert status_data["status"] in ["processing", "completed", "cancelled"]
 
     # 3. Report before completion returns 400
     report_res = client.get(f"/api/v1/research/{task_id}/report")

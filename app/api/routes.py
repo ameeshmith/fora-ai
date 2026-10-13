@@ -188,11 +188,13 @@ async def cancel_research(task_id: str) -> CancelResponse:
     description="Polls current execution status, active node step, and iteration count from persistent checkpoint.",
 )
 async def get_research_status(task_id: str) -> TaskStatusResponse:
-    # 1. First check LangGraph checkpoint persistence
-    checkpoint_state = await get_task_state(task_id)
-
-    # 2. Check in-memory fast registry
+    # 1. Fast in-memory lookup first (zero lock contention, microsecond response)
     mem_state = _in_memory_task_registry.get(task_id)
+    checkpoint_state = None
+
+    if not mem_state or mem_state.get("status") not in ("completed", "failed", "cancelled"):
+        # Query checkpoint if in-memory state is absent or needs hydration
+        checkpoint_state = await get_task_state(task_id)
 
     if not checkpoint_state and not mem_state:
         raise HTTPException(
@@ -200,7 +202,7 @@ async def get_research_status(task_id: str) -> TaskStatusResponse:
             detail=f"Task with ID '{task_id}' was not found.",
         )
 
-    # Aggregate state from checkpoint or memory
+    # Aggregate state: prefer active checkpoint if available, fallback to memory
     source_state = checkpoint_state or mem_state or {}
 
     current_step = source_state.get("current_step")

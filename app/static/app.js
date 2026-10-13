@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (submitBtn) {
                 submitBtn.disabled = true;
                 const caption = submitBtn.querySelector(".btn-caption");
-                if (caption) caption.textContent = "DISPATCHING...";
+                if (caption) caption.textContent = "Researching...";
             }
             if (reportSection) reportSection.style.display = "none";
             if (telemetrySection) {
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastRenderedLogsCount = 0;
             startTimer();
 
-            if (fleetStateBadge) fleetStateBadge.textContent = "ENGAGED";
+            if (fleetStateBadge) fleetStateBadge.textContent = "SEARCHING";
 
             const maxSources = maxSourcesSelect ? parseInt(maxSourcesSelect.value, 10) : 10;
             const timeoutSecs = timeoutSelect ? parseInt(timeoutSelect.value, 10) : 120;
@@ -140,19 +140,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (activeTaskIdEl) {
                     activeTaskIdEl.textContent = currentTaskId.substring(0, 14) + "...";
                 }
-                showToast("Directives dispatched across cognitive agent matrix.");
+                showToast("Research started. Gathering live sources...");
 
                 startPolling(currentTaskId);
                 fetchSessionHistory();
             } catch (err) {
-                console.error("Failed to dispatch task:", err);
-                showToast(`Dispatch failed: ${err.message}`, true);
+                console.error("Failed to start research:", err);
+                showToast(`Search failed: ${err.message}`, true);
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     const caption = submitBtn.querySelector(".btn-caption");
-                    if (caption) caption.textContent = "DISPATCH AGENTS";
+                    if (caption) caption.textContent = "Start Research";
                 }
-                if (fleetStateBadge) fleetStateBadge.textContent = "DISPATCH ERROR";
+                if (fleetStateBadge) fleetStateBadge.textContent = "ERROR";
                 stopTimer();
             }
         });
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         const caption = submitBtn.querySelector(".btn-caption");
-                        if (caption) caption.textContent = "DISPATCH AGENTS";
+                        if (caption) caption.textContent = "Start Research";
                     }
                     fetchAndRenderDossier(taskId);
                     fetchSessionHistory();
@@ -219,11 +219,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         fleetStateBadge.textContent = "CANCELLED";
                         fleetStateBadge.style.color = "var(--accent-red)";
                     }
-                    showToast("Task execution terminated by user.", true);
+                    showToast("Research cancelled.", true);
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         const caption = submitBtn.querySelector(".btn-caption");
-                        if (caption) caption.textContent = "DISPATCH AGENTS";
+                        if (caption) caption.textContent = "Start Research";
                     }
                     fetchSessionHistory();
                 } else if (statusData.status === "failed") {
@@ -235,11 +235,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         fleetStateBadge.textContent = "FAILED";
                         fleetStateBadge.style.color = "var(--accent-red)";
                     }
-                    showToast(`Mission failed: ${statusData.error || "Unknown error"}`, true);
+                    showToast(`Research failed: ${statusData.error || "Unknown error"}`, true);
                     if (submitBtn) {
                         submitBtn.disabled = false;
                         const caption = submitBtn.querySelector(".btn-caption");
-                        if (caption) caption.textContent = "DISPATCH AGENTS";
+                        if (caption) caption.textContent = "Start Research";
                     }
                     fetchSessionHistory();
                 }
@@ -259,11 +259,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (step === "planner") {
             if (flowPlanner) flowPlanner.classList.add("active");
         } else if (step === "researcher") {
+            if (flowPlanner) flowPlanner.classList.add("completed");
             if (flowResearcher) flowResearcher.classList.add("active");
         } else if (step === "critic") {
+            if (flowPlanner) flowPlanner.classList.add("completed");
+            if (flowResearcher) flowResearcher.classList.add("completed");
             if (flowCritic) flowCritic.classList.add("active");
-        } else if (step === "synthesizer" || step === "verifier" || step === "completed") {
+        } else if (step === "synthesizer" || step === "verifier") {
+            if (flowPlanner) flowPlanner.classList.add("completed");
+            if (flowResearcher) flowResearcher.classList.add("completed");
+            if (flowCritic) flowCritic.classList.add("completed");
             if (flowSynthesizer) flowSynthesizer.classList.add("active");
+        } else if (step === "completed") {
+            if (flowPlanner) flowPlanner.classList.add("completed");
+            if (flowResearcher) flowResearcher.classList.add("completed");
+            if (flowCritic) flowCritic.classList.add("completed");
+            if (flowSynthesizer) flowSynthesizer.classList.add("completed");
         }
 
         // Stream New Logs
@@ -277,7 +288,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetFlowAgents() {
         [flowPlanner, flowResearcher, flowCritic, flowSynthesizer].forEach(node => {
-            if (node) node.classList.remove("active");
+            if (node) {
+                node.classList.remove("active");
+                node.classList.remove("completed");
+            }
         });
     }
 

@@ -2,21 +2,51 @@
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import List, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 
+class QuestionType(str, Enum):
+    """Generic question-intent classification supported across all domains."""
+    FACTUAL_QUESTION = "factual_question"
+    DEFINITION = "definition"
+    EXPLANATION = "explanation"
+    CAUSAL_QUESTION = "causal_question"          # "Why does X work?", root causes
+    HOW_IT_WORKS = "how_it_works"                # Mechanisms, underlying processes
+    COMPARISON = "comparison"                    # Comparative criteria across multiple entities
+    RECOMMENDATION = "recommendation"
+    TROUBLESHOOTING = "troubleshooting"
+    PROCEDURE_HOW_TO = "procedure_how_to"        # Step-by-step procedural guides
+    CURRENT_LATEST = "current_latest"            # Contemporary updates requiring date verification
+    HISTORICAL = "historical"                    # Epoch-specific historical queries
+    QUANTITATIVE = "quantitative"                # Metric, numeric, measurement questions
+    EVIDENCE_RESEARCH = "evidence_research"      # Scientific study/literature retrieval
+    REGULATORY_LEGAL = "regulatory_legal"        # Compliance, mandates, legal frameworks
+    OPINION_INTERPRETATION = "opinion_interpretation"
+    SUMMARIZATION = "summarization"
+
+
+class RelevanceClassification(str, Enum):
+    """Direct question relevance classification to prevent topical drift."""
+    DIRECTLY_RELEVANT = "DIRECTLY_RELEVANT"          # Directly answers the specific question / mechanism
+    PARTIALLY_RELEVANT = "PARTIALLY_RELEVANT"        # Provides necessary partial context or step
+    TOPICALLY_RELEVANT_ONLY = "TOPICALLY_RELEVANT_ONLY"# Same topic, but fails to answer specific question
+    IRRELEVANT = "IRRELEVANT"                        # Off-topic or unrelated context
+
+
 class QueryIntent(str, Enum):
-    """Categorization of what the user is actually seeking."""
+    """Categorization of what the user is actually seeking (mapped from QuestionType)."""
     EXPLANATORY = "EXPLANATORY"                  # "Explain X", core mechanisms
     COMPARISON = "COMPARISON"                    # "Compare X and Y", trade-offs
     RECENT_DEVELOPMENTS = "RECENT_DEVELOPMENTS"  # "What is the latest on X?"
     REQUIREMENTS = "REQUIREMENTS"                # "What are the requirements for X?"
-    CAUSAL_ANALYSIS = "CAUSAL_ANALYSIS"          # "Why did X happen?"
+    CAUSAL_ANALYSIS = "CAUSAL_ANALYSIS"          # "Why did X happen / why is X effective?"
     LITERATURE_RETRIEVAL = "LITERATURE_RETRIEVAL"# "Give me papers / studies on X"
     FACT_VERIFICATION = "FACT_VERIFICATION"      # "Is X true / feasible?"
     HOW_TO = "HOW_TO"                            # "How to implement / build X?"
     DIRECT_FACT = "DIRECT_FACT"                  # Simple factual question
+    QUANTITATIVE = "QUANTITATIVE"                # Numeric/metric inquiries
+    DEFINITION = "DEFINITION"                    # Authoritative terminology definitions
 
 
 class TemporalScope(str, Enum):
@@ -42,13 +72,58 @@ class SupportLevel(str, Enum):
     INFERENCE = "INFERENCE"
 
 
+class ScoringWeights(BaseModel):
+    """Configurable weights for hybrid multi-factor candidate chunk reranking."""
+    w_semantic: float = Field(default=0.20, description="Weight for semantic/vector similarity")
+    w_entity: float = Field(default=0.20, description="Weight for exact entity and alias matching")
+    w_intent: float = Field(default=0.20, description="Weight for question-type keyword/intent match")
+    w_question: float = Field(default=0.20, description="Weight for direct question answering capability")
+    w_source: float = Field(default=0.10, description="Weight for authority source tier")
+    w_recency: float = Field(default=0.10, description="Weight for temporal proximity when applicable")
+
+
 class QueryUnderstandingProfile(BaseModel):
-    """Structured decomposition and classification of the user directive."""
-    intent: QueryIntent = Field(..., description="Detected intent of the user prompt")
-    temporal_scope: TemporalScope = Field(..., description="Temporal boundary needed")
-    primary_entities: List[str] = Field(default_factory=list, description="Key subjects / entities")
-    search_strategy: str = Field(..., description="Strategy for query fan-out")
-    recommended_format: str = Field(..., description="Target structural layout for final response")
+    """Structured decomposition and deep intent profile of the user directive."""
+    entities: List[str] = Field(default_factory=list, description="Extracted target subjects / entities")
+    main_topic: str = Field(default="", description="High-level subject domain or theme")
+    question_type: QuestionType = Field(default=QuestionType.EXPLANATION, description="Classified generic question type")
+    intent: QueryIntent = Field(default=QueryIntent.EXPLANATORY, description="High-level intent mapping")
+    requested_information: str = Field(default="", description="Specific information required to answer query")
+    required_evidence: List[str] = Field(default_factory=list, description="Concrete evidence facets needed")
+    exclude_topics: List[str] = Field(default_factory=list, description="Topical drift areas to explicitly filter out")
+    constraints: List[str] = Field(default_factory=list, description="Target conditions, populations, or scopes")
+    time_requirement: Optional[str] = Field(default=None, description="Specific era or recency constraint if any")
+    comparison_targets: List[str] = Field(default_factory=list, description="Entities involved if comparison")
+    domain: Optional[str] = Field(default="general", description="Detected scientific/technical/legal/general domain")
+    temporal_scope: TemporalScope = Field(default=TemporalScope.RECENT, description="Temporal boundary needed")
+    primary_entities: List[str] = Field(default_factory=list, description="Key subjects (alias for entities)")
+    search_strategy: str = Field(default="Targeted multi-angle retrieval", description="Strategy for query fan-out")
+    recommended_format: str = Field(default="Direct Answer + Mechanism + Evidence", description="Structural layout")
+
+
+class EvidenceItem(BaseModel):
+    """Structured evidence item verified and accepted into the Evidence Set before answer generation."""
+    evidence_id: str = Field(..., description="Unique evidence identifier, e.g. EVD-01")
+    text: str = Field(..., description="Verbatim extracted excerpt containing the proof")
+    source_url: str = Field(..., description="Canonical source URL")
+    source_title: str = Field(default="", description="Page title")
+    entity: str = Field(default="", description="Target entity this evidence applies to")
+    relevance_classification: RelevanceClassification = Field(..., description="Direct or partial relevance classification")
+    relevance_score: float = Field(default=0.0, description="Calculated multi-factor score [0.0 - 1.0]")
+    source_tier: SourceTier = Field(default=SourceTier.TIER_2_SECONDARY, description="Source authority tier")
+    evidence_type: str = Field(default="empirical", description="Category: mechanism, quantitative_metric, definition, etc.")
+    publication_date: Optional[str] = Field(default=None, description="Extracted or detected publication timestamp")
+
+
+class DebugTrace(BaseModel):
+    """Developer observability trace detailing retrieval and verification decisions."""
+    parsed_query: Dict[str, Any] = Field(default_factory=dict)
+    candidate_chunks_evaluated: int = Field(default=0)
+    accepted_evidence_count: int = Field(default=0)
+    rejected_chunks_count: int = Field(default=0)
+    rejected_chunks: List[Dict[str, Any]] = Field(default_factory=list)
+    scoring_weights: Dict[str, float] = Field(default_factory=dict)
+    insufficient_evidence_flag: bool = Field(default=False)
 
 
 class Citation(BaseModel):
@@ -179,6 +254,15 @@ class ResearchReport(BaseModel):
     )
     citations: List[Citation] = Field(
         default_factory=list, description="Verified references supporting the report"
+    )
+    evidence_set: List[EvidenceItem] = Field(
+        default_factory=list, description="Curated accepted evidence units passed to answer generation"
+    )
+    debug_trace: Optional[DebugTrace] = Field(
+        default=None, description="Observability trace with scores, rejected chunks, and evaluations"
+    )
+    insufficient_evidence_acknowledged: bool = Field(
+        default=False, description="Flag indicating if the system recognized evidence insufficiency"
     )
     generated_at: str = Field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat(),
