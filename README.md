@@ -3,6 +3,7 @@
 **FORA AI** is a production-grade, zero-cost autonomous research control plane built with **LangGraph**, the **Model Context Protocol (MCP)**, **Groq Cloud**, and **FastAPI**, styled in an ultra-modern cyber-security dark aesthetic inspired by **Guardbase**.
 
 ---
+[![FORA AI: Autonomous Deep Research Engine](https://repoclip.io/api/badge/56d7d13d-d54c-4114-9d0c-8ac032068950)](https://repoclip.io/v/56d7d13d-d54c-4114-9d0c-8ac032068950)
 
 ## ⚡ What Makes FORA AI Different?
 
