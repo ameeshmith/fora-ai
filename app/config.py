@@ -98,14 +98,17 @@ class Settings(BaseSettings):
             try:
                 from langchain_groq import ChatGroq
 
+                # Groq on-demand free tier enforces a strict 1,000 Output Tokens Per Minute (OTPM) limit.
+                # Requests asking for >= 1,000 max_tokens fail immediately with 429 rate_limit_exceeded.
+                safe_max_tokens = min(max_tokens or 650, 900)
+
                 kwargs = {
                     "model": model or self.DEFAULT_MODEL,
                     "groq_api_key": api_key or "placeholder_key",
                     "temperature": temperature,
                     "timeout": self.REQUEST_TIMEOUT_SECONDS,
+                    "max_tokens": safe_max_tokens,
                 }
-                if max_tokens is not None:
-                    kwargs["max_tokens"] = max_tokens
 
                 return ChatGroq(**kwargs)
             except Exception as exc:

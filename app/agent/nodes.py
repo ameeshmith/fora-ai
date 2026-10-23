@@ -923,7 +923,7 @@ async def synthesizer_node(state: ResearchState) -> Dict[str, Any]:
     try:
         # Brief pause to let Groq TPM token burst window settle
         await asyncio.sleep(0.3)
-        llm = settings.get_llm(temperature=0.0, max_tokens=1200)
+        llm = settings.get_llm(temperature=0.0, max_tokens=850)
         res = await llm.ainvoke([
             SystemMessage(content=system_prompt),
             HumanMessage(content=user_prompt),
