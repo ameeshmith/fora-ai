@@ -1305,6 +1305,295 @@ body.fora-body {
 }
 
 /* ==============================================================================
+   EXECUTIVE SUMMARY & KEY FINDINGS UI CARDS
+   ============================================================================== */
+.executive-summary-card {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    margin: 24px 0 28px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.08);
+}
+
+.summary-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.summary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-primary);
+    background: rgba(6, 182, 212, 0.15);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+}
+
+.summary-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand-emerald);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #e2e8f0;
+}
+
+.summary-body p {
+    margin-bottom: 14px;
+}
+
+.summary-body p:last-child {
+    margin-bottom: 0;
+}
+
+.summary-body strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Key Findings Section & Grid */
+.findings-section {
+    margin: 32px 0;
+}
+
+.findings-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+}
+
+.findings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.finding-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    transition: all 0.2s ease;
+}
+
+.finding-card:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+}
+
+.finding-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--brand-emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.finding-text {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #cbd5e1;
+}
+
+.finding-text strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.finding-text a {
+    color: var(--brand-primary);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Investigation Details Section */
+.investigation-details-section {
+    margin: 36px 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.section-subheading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+}
+
+/* Claims Accordion Box */
+.claims-accordion-box {
+    margin: 32px 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.claims-details {
+    padding: 0;
+}
+
+.claims-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: var(--bg-input);
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.claims-summary:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.claims-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.claims-toggle-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.claims-list-container {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.claim-row {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+}
+
+.claim-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.claim-id {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.support-pill {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+}
+
+.support-pill.well {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--brand-emerald);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.support-pill.partial {
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--brand-primary);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.support-pill.conflict {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.support-pill.insufficient {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.claim-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.claim-quote {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 2px solid var(--brand-primary);
+    padding: 6px 12px;
+    margin-bottom: 8px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.claim-sources-list {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.claim-sources-list a {
+    color: var(--brand-primary);
+    text-decoration: underline;
+    margin-left: 4px;
+}
+
+/* ==============================================================================
    FOOTER
    ============================================================================== */
 .app-footer {

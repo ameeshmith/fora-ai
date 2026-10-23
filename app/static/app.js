@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Dossier Section
     const reportSection = document.getElementById("reportSection");
     const dossierTopicTitle = document.getElementById("dossierTopicTitle");
+    const executiveSummaryCard = document.getElementById("executiveSummaryCard");
+    const executiveSummaryContent = document.getElementById("executiveSummaryContent");
+    const keyFindingsSection = document.getElementById("keyFindingsSection");
+    const keyFindingsGrid = document.getElementById("keyFindingsGrid");
     const reportMarkdownContainer = document.getElementById("reportMarkdownContainer");
     const sourcesList = document.getElementById("sourcesList");
     const sourcesCountBadge = document.getElementById("sourcesCountBadge");
@@ -356,6 +360,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             } else {
                 if (contradictionBox) contradictionBox.style.display = "none";
+            }
+
+            // Render Executive Summary Card
+            const execSummary = data.executive_summary || "";
+            if (executiveSummaryContent) {
+                if (execSummary && execSummary.trim().length > 0) {
+                    if (executiveSummaryCard) executiveSummaryCard.style.display = "block";
+                    const paras = execSummary.split(/\n\n+/).filter(p => p.trim().length > 0);
+                    executiveSummaryContent.innerHTML = paras.map(p => `<p>${renderInlineMarkdown(p)}</p>`).join("");
+                } else {
+                    if (executiveSummaryCard) executiveSummaryCard.style.display = "none";
+                }
+            }
+
+            // Render Key Validated Findings Section
+            const findings = data.key_findings || [];
+            if (keyFindingsGrid) {
+                keyFindingsGrid.innerHTML = "";
+                if (findings && findings.length > 0) {
+                    if (keyFindingsSection) keyFindingsSection.style.display = "block";
+                    findings.forEach(kf => {
+                        const card = document.createElement("div");
+                        card.className = "finding-card";
+                        card.innerHTML = `
+                            <div class="finding-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div class="finding-text">${renderInlineMarkdown(kf)}</div>
+                        `;
+                        keyFindingsGrid.appendChild(card);
+                    });
+                } else {
+                    if (keyFindingsSection) keyFindingsSection.style.display = "none";
+                }
             }
 
             // Render Markdown body
@@ -726,9 +764,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3600);
     }
 
-    // Markdown Parser with Table Support
+    // Inline Markdown (Bold, Italics, Links)
+    function renderInlineMarkdown(text) {
+        if (!text) return "";
+        let html = escapeHtml(text);
+        html = html.replace(/\[(.*?)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--brand-primary); text-decoration: underline;">$1</a>');
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        return html;
+    }
+
+    // Markdown Parser with Table & Robust List Support
     function renderMarkdown(md) {
         if (!md) return "";
+        md = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
         let html = escapeHtml(md);
 
         // Code blocks
@@ -737,7 +786,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Markdown Tables (Comparison Matrices)
-        html = html.replace(/\|(.+)\|[\r\n]+\|[-:| ]+\|[\r\n]+((?:\|.*\|[\r\n]*)+)/g, (match, headerLine, bodyLines) => {
+        html = html.replace(/\|(.+)\|[\n]+\|[-:| ]+\|[\n]+((?:\|.*\|[\n]*)+)/g, (match, headerLine, bodyLines) => {
             const headers = headerLine.split('|').map(h => h.trim()).filter(h => h.length > 0);
             const rows = bodyLines.trim().split('\n').map(row => {
                 const cells = row.split('|').map(c => c.trim()).filter(c => c.length > 0);
@@ -761,9 +810,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Blockquotes
         html = html.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>');
 
-        // Lists
+        // Lists: convert each bullet then group consecutive <li> elements into <ul>
         html = html.replace(/^\s*[\-\*]\s+(.*$)/gim, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)/gims, '<ul style="margin: 12px 0 16px; padding-left: 20px;">$1</ul>');
+        html = html.replace(/((?:<li>.*?<\/li>\s*)+)/gis, '<ul style="margin: 12px 0 16px; padding-left: 20px;">$1</ul>');
 
         // Paragraphs
         html = html.split('\n\n').map(p => {

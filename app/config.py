@@ -56,7 +56,7 @@ class Settings(BaseSettings):
         description="Number of search results to pull per query",
     )
     REQUEST_TIMEOUT_SECONDS: int = Field(
-        default=30,
+        default=45,
         description="HTTP timeout in seconds for scraping and external calls",
     )
 
@@ -127,7 +127,26 @@ class Settings(BaseSettings):
                 raise
 
         elif provider == "mock":
-            from langchain_community.chat_models import FakeListChatModel
+            try:
+                from langchain_core.language_models.fake_chat_models import FakeListChatModel
+            except ImportError:
+                try:
+                    from langchain_community.chat_models import FakeListChatModel
+                except ImportError:
+                    class FakeListChatModel:  # type: ignore
+                        def __init__(self, responses):
+                            self.responses = list(responses)
+                            self._idx = 0
+                        async def ainvoke(self, messages, *args, **kwargs):
+                            from langchain_core.messages import AIMessage
+                            resp = self.responses[self._idx % len(self.responses)]
+                            self._idx += 1
+                            return AIMessage(content=resp)
+                        def invoke(self, messages, *args, **kwargs):
+                            from langchain_core.messages import AIMessage
+                            resp = self.responses[self._idx % len(self.responses)]
+                            self._idx += 1
+                            return AIMessage(content=resp)
 
             return FakeListChatModel(
                 responses=[
