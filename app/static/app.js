@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (!res.ok) {
                     const errData = await res.json().catch(() => ({}));
-                    throw new Error(errData.detail || `Server error: ${res.status}`);
+                    throw new Error(formatApiError(errData, `Server error: ${res.status}`));
                 }
 
                 const data = await res.json();
@@ -516,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (!res.ok) {
                     const errData = await res.json().catch(() => ({}));
-                    throw new Error(errData.detail || "Grounded query failed.");
+                    throw new Error(formatApiError(errData, "Grounded query failed."));
                 }
 
                 const data = await res.json();
@@ -740,6 +740,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, "0");
         const secs = String(secondsElapsed % 60).padStart(2, "0");
         timerBadge.textContent = `${mins}:${secs}`;
+    }
+
+    // API Error Formatter (handles strings, arrays, and Pydantic validation errors)
+    function formatApiError(errData, fallback) {
+        if (!errData || !errData.detail) return fallback;
+        if (typeof errData.detail === "string") return errData.detail;
+        if (Array.isArray(errData.detail)) {
+            return errData.detail.map(d => d.msg || d.message || JSON.stringify(d)).join("; ");
+        }
+        if (typeof errData.detail === "object") {
+            return errData.detail.msg || errData.detail.message || JSON.stringify(errData.detail);
+        }
+        return String(errData.detail);
     }
 
     // Toast Notification Utility

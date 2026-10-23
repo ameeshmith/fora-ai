@@ -170,7 +170,7 @@ class ResearchRequest(BaseModel):
     """Payload for submitting a new autonomous research task."""
     topic: str = Field(
         ...,
-        min_length=3,
+        min_length=1,
         max_length=500,
         description="The research topic, question, or thesis to investigate",
         examples=["OpenAI Swarm vs LangGraph vs CrewAI architecture benchmark"],
@@ -313,7 +313,7 @@ class QuestionRequest(BaseModel):
     """Payload for asking grounded follow-up questions over a research report."""
     question: str = Field(
         ...,
-        min_length=3,
+        min_length=1,
         max_length=500,
         description="Follow-up question regarding the research findings",
     )
